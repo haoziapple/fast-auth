@@ -1,5 +1,6 @@
 package github.haozi.uauth.config;
 
+import github.haozi.uauth.common.util.IdWorker;
 import github.haozi.uauth.domain.ProfileEntity;
 import github.haozi.uauth.domain.enumeration.Sex;
 import github.haozi.uauth.repository.ProfileRepo;
@@ -53,15 +54,16 @@ public class DbConfig implements InitializingBean {
 
     private void initProfileData(ProfileRepo profileRepo) {
         Pager pager = new Pager(1, 1);
-        List<ProfileEntity> list = profileRepo.query(Cnd.where("name", "=", "wanghao"), pager);
+        List<ProfileEntity> list = profileRepo.query(Cnd.where("name", "=", "wanghao"));
         if (profileRepo.count(Cnd.where("name", "=", "wanghao")) > 0) {
             return;
         }
         ProfileEntity profileEntity = new ProfileEntity();
+        profileEntity.setId(IdWorker.getIdStr());
         profileEntity.setName("wanghao");
         profileEntity.setSex(Sex.MALE);
         profileEntity.setIdNumber("320");
-        ProfileEntity added = profileRepo.addProfile(profileEntity);
+        ProfileEntity added = profileRepo.create(profileEntity);
         log.info("add profile success: {}", added.getId());
     }
 

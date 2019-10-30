@@ -12,6 +12,8 @@ public class ActionResult<T> implements Serializable {
     public static final String OK_MSG = "ok";
     public static final int FAIL_CODE = 1;
     public static final String FAIL_MSG = "fail";
+    public static final int UNAUTH_CODE = 2;
+    public static final String UNAUTH_MSG = "Unauthorized";
     /**
      * 响应码
      */
@@ -39,6 +41,10 @@ public class ActionResult<T> implements Serializable {
 
     public static <T> ActionResult<T> fail(T value) {
         return new ActionResult<>(FAIL_CODE, FAIL_MSG, value);
+    }
+
+    public static <T> ActionResult<T> unauth(T value) {
+        return new ActionResult<>(UNAUTH_CODE, UNAUTH_MSG, value);
     }
 
     public int getCode() {

@@ -1,4 +1,4 @@
-package github.haozi.uauth.common;
+package github.haozi.uauth.common.util;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;

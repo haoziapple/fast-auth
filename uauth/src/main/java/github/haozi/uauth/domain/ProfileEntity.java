@@ -10,8 +10,10 @@ import org.nutz.dao.entity.annotation.*;
  */
 @Table("t_ius_profile")
 public class ProfileEntity {
-    @Name //注意,字符串主键用@Name,与属性名称无关!!!
-    @Prev(els=@EL("uuid()")) // 可以是 uuid() uuid(32)
+    //注意,字符串主键用@Name,与属性名称无关!!!
+    @Name
+    // 可以是 uuid() uuid(32)
+    // @Prev(els = @EL("uuid()"))
     private String id;
 
     @Column

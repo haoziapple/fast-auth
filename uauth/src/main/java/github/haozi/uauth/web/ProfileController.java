@@ -1,12 +1,20 @@
 package github.haozi.uauth.web;
 
 import github.haozi.uauth.common.ActionResult;
+import github.haozi.uauth.common.PageInfo;
+import github.haozi.uauth.common.SearchCommonVO;
+import github.haozi.uauth.common.util.IdWorker;
+import github.haozi.uauth.domain.ProfileCriteria;
+import github.haozi.uauth.service.ProfileService;
 import github.haozi.uauth.service.dto.ProfileDTO;
 import lombok.extern.slf4j.Slf4j;
-import org.nutz.lang.random.R;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URISyntaxException;
+import java.util.List;
+
+import static github.haozi.uauth.common.Constants.API_URL;
 
 /**
  * @author wanghao
@@ -14,20 +22,21 @@ import java.net.URISyntaxException;
  * @date 2019-10-29 13:41
  */
 @RestController
-@RequestMapping("/api")
+@RequestMapping(API_URL + "profile")
 @Slf4j
 public class ProfileController {
+    @Autowired
+    private ProfileService profileService;
 
     /**
      * @param profileDTO
      * @return
      * @throws URISyntaxException
      */
-    @PostMapping("/createProfile")
-    public ActionResult<ProfileDTO> createProfile(@RequestBody ProfileDTO profileDTO) throws URISyntaxException {
-        // TODO create profile
-        profileDTO.setId(R.UU16());
-        return ActionResult.ok(profileDTO);
+    @PostMapping("/create")
+    public ActionResult<ProfileDTO> create(@RequestBody ProfileDTO profileDTO) {
+        // create profile
+        return ActionResult.ok(profileService.create(profileDTO));
     }
 
     /**
@@ -35,29 +44,44 @@ public class ProfileController {
      * @return
      * @throws URISyntaxException
      */
-    @PostMapping("/updateProfile")
-    public ActionResult<ProfileDTO> updateProfile(@RequestBody ProfileDTO profileDTO) throws URISyntaxException {
-        // TODO update profile
-        return ActionResult.ok(profileDTO);
+    @PostMapping("/update")
+    public ActionResult<Void> update(@RequestBody ProfileDTO profileDTO) {
+        int updated = profileService.update(profileDTO);
+        if(updated > 0) {
+            return ActionResult.ok(null);
+        }else {
+            return ActionResult.fail(null);
+        }
+    }
+
+    @PostMapping("/query")
+    public ActionResult<List<ProfileDTO>> query(@RequestBody ProfileCriteria criteria) {
+        return ActionResult.ok(profileService.query(criteria));
+    }
+
+    @PostMapping("/pageQuery")
+    public ActionResult<PageInfo<ProfileDTO>> pageQuery(@RequestBody SearchCommonVO<ProfileCriteria> search) {
+        return ActionResult.ok(profileService.pageQuery(search));
     }
 
     /**
      * @param id
      * @return
      */
-    @GetMapping("/getProfile/{id}")
-    public ActionResult<ProfileDTO> getProfile(@PathVariable String id) {
-        // TODO get profile detail
-        return ActionResult.ok(new ProfileDTO());
+    @GetMapping("/detail/{id}")
+    public ActionResult<ProfileDTO> detail(@PathVariable String id) {
+        // get profile detail
+        return ActionResult.ok(profileService.detail(id));
     }
 
     /**
      * @param id
      * @return
      */
-    @PostMapping("/deleteProfile/{id}")
-    public ActionResult<Void> deleteProfile(@PathVariable String id) {
-        // TODO delete profile
+    @PostMapping("/delete/{id}")
+    public ActionResult<Void> delete(@PathVariable String id) {
+        // delete profile
+        profileService.delete(id);
         return ActionResult.ok(null);
     }
 }

@@ -12,6 +12,10 @@ public class ProfileDTO {
 
     private String name;
 
+    private String accountName;
+
+    private String password;
+
     private Sex sex;
 
     public String getId() {
@@ -28,6 +32,22 @@ public class ProfileDTO {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getAccountName() {
+        return accountName;
+    }
+
+    public void setAccountName(String accountName) {
+        this.accountName = accountName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public Sex getSex() {

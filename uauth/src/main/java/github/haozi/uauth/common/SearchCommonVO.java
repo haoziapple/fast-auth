@@ -1,11 +1,13 @@
 package github.haozi.uauth.common;
 
+import java.io.Serializable;
+
 /**
  * @author wanghao
  * @Description
  * @date 2019-10-29 19:06
  */
-public class SearchCommonVO<T> {
+public class SearchCommonVO<T> implements Serializable {
     private int pageNum;
     private int pageSize;
     private T filters;
