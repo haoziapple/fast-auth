@@ -1,15 +1,14 @@
 package github.haozi.uauth.service.dto;
 
 import github.haozi.uauth.domain.enumeration.Sex;
+import github.haozi.uauth.framework.BaseDTO;
 
 /**
  * @author wanghao
  * @Description
  * @date 2019-10-29 14:21
  */
-public class ProfileDTO {
-    private String id;
-
+public class ProfileDTO extends BaseDTO {
     private String name;
 
     private String accountName;
@@ -18,13 +17,7 @@ public class ProfileDTO {
 
     private Sex sex;
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
+    private String idNumber;
 
     public String getName() {
         return name;
@@ -56,5 +49,13 @@ public class ProfileDTO {
 
     public void setSex(Sex sex) {
         this.sex = sex;
+    }
+
+    public String getIdNumber() {
+        return idNumber;
+    }
+
+    public void setIdNumber(String idNumber) {
+        this.idNumber = idNumber;
     }
 }

@@ -1,6 +1,8 @@
 package github.haozi.uauth.domain;
 
 import github.haozi.uauth.domain.enumeration.Sex;
+import github.haozi.uauth.framework.BaseEntity;
+import lombok.ToString;
 import org.nutz.dao.entity.annotation.*;
 
 /**
@@ -9,14 +11,10 @@ import org.nutz.dao.entity.annotation.*;
  * @date 2019-10-29 14:25
  */
 @Table("t_ius_profile")
-public class ProfileEntity {
-    //注意,字符串主键用@Name,与属性名称无关!!!
-    @Name
-    // 可以是 uuid() uuid(32)
-    // @Prev(els = @EL("uuid()"))
-    private String id;
+@ToString
+public class ProfileEntity extends BaseEntity {
 
-    @Column
+    @Column(hump = true)
     @Comment("名称")
     private String name;
 
@@ -28,21 +26,13 @@ public class ProfileEntity {
     @Comment("登录密码")
     private String password;
 
-    @Column
+    @Column(hump = true)
     @Comment("性别")
     private Sex sex;
 
     @Column(hump = true)
     @Comment("身份证号")
     private String idNumber;
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;

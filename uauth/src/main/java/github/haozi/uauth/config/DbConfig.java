@@ -53,13 +53,11 @@ public class DbConfig implements InitializingBean {
     }
 
     private void initProfileData(ProfileRepo profileRepo) {
-        Pager pager = new Pager(1, 1);
         List<ProfileEntity> list = profileRepo.query(Cnd.where("name", "=", "wanghao"));
         if (profileRepo.count(Cnd.where("name", "=", "wanghao")) > 0) {
             return;
         }
         ProfileEntity profileEntity = new ProfileEntity();
-        profileEntity.setId(IdWorker.getIdStr());
         profileEntity.setName("wanghao");
         profileEntity.setSex(Sex.MALE);
         profileEntity.setIdNumber("320");

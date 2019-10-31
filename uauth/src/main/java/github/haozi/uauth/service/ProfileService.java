@@ -32,7 +32,6 @@ public class ProfileService {
     public ProfileDTO create(ProfileDTO profileDTO) {
         Assert.notNull(profileDTO, "profileDTO is null!");
         ProfileEntity entity = ProfileMapper.INSTANCE.dtoToEntity(profileDTO);
-        entity.setId(IdWorker.getIdStr());
         ProfileEntity created = profileRepo.create(entity);
         return ProfileMapper.INSTANCE.entityToDto(created);
     }
