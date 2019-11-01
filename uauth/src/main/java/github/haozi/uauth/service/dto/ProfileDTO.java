@@ -19,6 +19,7 @@ public class ProfileDTO extends BaseDTO {
 
     private String idNumber;
 
+    private Integer age;
     public String getName() {
         return name;
     }
@@ -57,5 +58,13 @@ public class ProfileDTO extends BaseDTO {
 
     public void setIdNumber(String idNumber) {
         this.idNumber = idNumber;
+    }
+
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
     }
 }

@@ -3,8 +3,7 @@ package github.haozi.uauth.web;
 import github.haozi.uauth.common.ActionResult;
 import github.haozi.uauth.common.PageInfo;
 import github.haozi.uauth.common.SearchCommonVO;
-import github.haozi.uauth.common.util.IdWorker;
-import github.haozi.uauth.domain.ProfileCriteria;
+import github.haozi.uauth.domain.ProfileQueryDTO;
 import github.haozi.uauth.service.ProfileService;
 import github.haozi.uauth.service.dto.ProfileDTO;
 import lombok.extern.slf4j.Slf4j;
@@ -55,12 +54,12 @@ public class ProfileController {
     }
 
     @PostMapping("/query")
-    public ActionResult<List<ProfileDTO>> query(@RequestBody ProfileCriteria criteria) {
+    public ActionResult<List<ProfileDTO>> query(@RequestBody ProfileQueryDTO criteria) {
         return ActionResult.ok(profileService.query(criteria));
     }
 
     @PostMapping("/pageQuery")
-    public ActionResult<PageInfo<ProfileDTO>> pageQuery(@RequestBody SearchCommonVO<ProfileCriteria> search) {
+    public ActionResult<PageInfo<ProfileDTO>> pageQuery(@RequestBody SearchCommonVO<ProfileQueryDTO> search) {
         return ActionResult.ok(profileService.pageQuery(search));
     }
 

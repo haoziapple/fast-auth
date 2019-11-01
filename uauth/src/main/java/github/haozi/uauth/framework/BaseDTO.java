@@ -19,6 +19,8 @@ public class BaseDTO {
     private Date createTime;
     @JsonFormat(shape = JsonFormat.Shape.NUMBER)
     private Date updateTime;
+    private String remark;
+    private String ext;
 
     public String getCreator() {
         return creator;
@@ -58,5 +60,21 @@ public class BaseDTO {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+
+    public String getExt() {
+        return ext;
+    }
+
+    public void setExt(String ext) {
+        this.ext = ext;
     }
 }

@@ -2,8 +2,7 @@ package github.haozi.uauth.service;
 
 import github.haozi.uauth.common.PageInfo;
 import github.haozi.uauth.common.SearchCommonVO;
-import github.haozi.uauth.common.util.IdWorker;
-import github.haozi.uauth.domain.ProfileCriteria;
+import github.haozi.uauth.domain.ProfileQueryDTO;
 import github.haozi.uauth.domain.ProfileEntity;
 import github.haozi.uauth.repository.ProfileRepo;
 import github.haozi.uauth.service.dto.ProfileDTO;
@@ -16,7 +15,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * @author wanghao
@@ -42,14 +40,14 @@ public class ProfileService {
         return profileRepo.update(entity);
     }
 
-    public List<ProfileDTO> query(ProfileCriteria criteria) {
+    public List<ProfileDTO> query(ProfileQueryDTO criteria) {
         Assert.notNull(criteria, "criteria is null!");
         Condition cnd = criteria.condition();
         List<ProfileEntity> entityList = profileRepo.query(cnd);
         return ProfileMapper.INSTANCE.entitiesToDtos(entityList);
     }
 
-    public PageInfo<ProfileDTO> pageQuery(SearchCommonVO<ProfileCriteria> search) {
+    public PageInfo<ProfileDTO> pageQuery(SearchCommonVO<ProfileQueryDTO> search) {
         Assert.notNull(search, "search is null!");
         Assert.notNull(search.getFilters(), "criteria is null!");
         Condition cnd = search.getFilters().condition();

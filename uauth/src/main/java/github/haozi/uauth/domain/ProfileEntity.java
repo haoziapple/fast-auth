@@ -2,6 +2,7 @@ package github.haozi.uauth.domain;
 
 import github.haozi.uauth.domain.enumeration.Sex;
 import github.haozi.uauth.framework.BaseEntity;
+import lombok.Data;
 import lombok.ToString;
 import org.nutz.dao.entity.annotation.*;
 
@@ -11,7 +12,9 @@ import org.nutz.dao.entity.annotation.*;
  * @date 2019-10-29 14:25
  */
 @Table("t_ius_profile")
+// TODO 为什么lombok的注解不起作用了
 @ToString
+@Data
 public class ProfileEntity extends BaseEntity {
 
     @Column(hump = true)
@@ -33,6 +36,10 @@ public class ProfileEntity extends BaseEntity {
     @Column(hump = true)
     @Comment("身份证号")
     private String idNumber;
+
+    @Column(hump = true)
+    @Comment("年龄")
+    private Integer age;
 
     public String getName() {
         return name;
@@ -72,5 +79,13 @@ public class ProfileEntity extends BaseEntity {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
     }
 }
